@@ -12,7 +12,7 @@
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
-        $("body").css("background-color", "#FFFCBE");
+        $("body").css("background-color", "#0EC2FF");
         $("body").css("font-family", "Georgia");
         $("body").css("width", "950px");
       var $title = $('<div class type="h1" = "title:>My Twittler!</div>');
@@ -20,40 +20,117 @@
       $title.css("font-weight","bold");
       $title.css("font-size", "36px")
       $title.css("text-align", "center");
-      $title.css("width", "950px");
+      $title.css("width", "700px");
+      $title.css("margin-top", "50px");
+      $title.css("margin-bottom", "50px");
+
 
 
        var $button = $('<button type="button" class = "newtweets">Show New Tweets!</button>');
         $button.appendTo($body);
-        $button.css("color", "green");
-        $button.css("background-color", "#C5FFAF")
+        $button.css("color", "black");
+        $button.css("background-color", "#0EC2FF")
         $button.css("font-family", "Georgia");
         $button.css("font-size", "18px");
         $button.css("border", "5px solid");
+        $button.css("margin-bottom", "20px");
 
         $button.on('click', function () {
           location.reload();
         });
 
+        $button.mouseenter(function() {
+            $(this).css("background-color", "#EFFF83");
+          });
+           $button.mouseleave(function() {
+            $(this).css("background-color", "#0EC2FF");
+          });
+           $button.css("cursor", "pointer");
+
+
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"></div>');
-          var $username = $('<div class="user"></div');
+          var $tweet = $('<span class="tweet"></span>');
+          var $username = $('<div class="user"></span>');
           $tweet.text(' ' + tweet.message + '\n' + tweet.created_at);
           $username.addClass(tweet.user).attr('user', tweet.user).text('@' + tweet.user + ': ');
           $tweet.appendTo($username);
           $username.appendTo($body);
           $tweet.appendTo($body);
+          
 
-          $username.click(function () {
-          window.open($(this).find("a:first").attr("href"));
-          return false;
+          $username.css("width", "20px");
+          $username.css("font-weight", "bold");
+
+          $username.mouseenter(function() {
+            $(this).css("color", "#EFFF83");
+          });
+           $username.mouseleave(function() {
+            $(this).css("color", "black");
+          });
+           $username.css("cursor", "pointer");
+    
+
+          $username.on("click", function () {
+            var username = $username.text();
+            var userstream = streams.user[name];
+            $(".userfeed").empty();
+            for (var i = 0; i < userstream.length; i++) {
+              var tweet = user[i].message;
+              var $tweet = $('<span class="tweet"></span>');
+              var $username = $('<div class="user"></span>');
+              $tweet.text(' ' + tweet.message + '\n' + tweet.created_at);
+              $username.addClass(tweet.user).attr('user', tweet.user).text('@' + tweet.user + ': ');
+              $tweet.appendTo($username);
+              $username.appendTo($(".userfeed"));
+              $body.hide();
+              $(".userfood").show();
+
+            }
+
         });
+
+
+
           index -= 1;
         }
 
-
+      var $submittweet = $('<h2>Submit a Tweet!</h2>');
+      $submittweet.appendTo($body);
+      $submittweet.css("text-align", "center");
+      $submittweet.css("width", "700px");
+      var $usernamesection = $('<div>Username</div>');
+      var $usernameForm = $('<input class="enterusername" type="text">');
+      $usernameForm.appendTo($usernamesection);
+      $usernamesection.appendTo($body); 
+      $usernameForm.css("margin", "10px"); 
+      var $twitt = $('<span>Tweet</span>');
+      $twitt.appendTo($body);
+      var $twittform = $('<input class="entertwitt" type="text">');
+      $twittform.appendTo($body);
+      $twittform.css("width", "500px");
+      $twittform.css("height", "100px");
+      $twittform.css("margin-left", "40px");
+      var $tweetbutton = $('<button type="button" class = "submittweet">Submit Tweet!</button>');
+      $tweetbutton.appendTo($body);
+        $tweetbutton.css("color", "black");
+        $tweetbutton.css("background-color", "#0EC2FF")
+        $tweetbutton.css("font-family", "Georgia");
+        $tweetbutton.css("font-size", "18px");
+        $tweetbutton.css("border", "5px solid");
+        $tweetbutton.css("margin-bottom", "20px");
+             $tweetbutton.mouseenter(function() {
+            $(this).css("background-color", "#EFFF83");
+          });
+           $tweetbutton.mouseleave(function() {
+            $(this).css("background-color", "#0EC2FF");
+          });
+           $tweetbutton.css("cursor", "pointer");
+        $tweetbutton.css("margin-left", "20px");
+        $tweetbutton.click(function() {
+          addTweet($twittform);
+        });
 
 
 

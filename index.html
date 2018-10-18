@@ -5,20 +5,44 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
+        
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
+        $("body").css("background-color", "#FFFCBE");
+        $("body").css("font-family", "Georgia");
+        $("body").css("width", "950px");
+      var $title = $('<div class type="h1" = "title:>My Twittler!</div>');
+      $title.appendTo($body);
+      $title.css("font-weight","bold");
+      $title.css("font-size", "36px")
+      $title.css("text-align", "center");
+      $title.css("width", "950px");
+
+
+       var $button = $('<button type="button" class = "refresh">Show New Tweets!</button>');
+        $button.appendTo($body);
+        $button.css("color", "green");
+        $button.css("background-color", "#C5FFAF")
+        $button.css("font-family", "Georgia");
+        $button.css("font-size", "18px");
+        $button.css("border", "5px solid");
+
+        $button.click(function () {
+          location.reload();
+        });
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + '\n' + tweet.created_at);
           $tweet.appendTo($body);
           index -= 1;
         }
+
 
       });
 

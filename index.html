@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <title>My Twittler</title>
   </head>
   <body>
         
@@ -22,7 +23,7 @@
       $title.css("width", "950px");
 
 
-       var $button = $('<button type="button" class = "refresh">Show New Tweets!</button>');
+       var $button = $('<button type="button" class = "newtweets">Show New Tweets!</button>');
         $button.appendTo($body);
         $button.css("color", "green");
         $button.css("background-color", "#C5FFAF")
@@ -30,18 +31,32 @@
         $button.css("font-size", "18px");
         $button.css("border", "5px solid");
 
-        $button.click(function () {
+        $button.on('click', function () {
           location.reload();
         });
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + '\n' + tweet.created_at);
+          var $tweet = $('<div class="tweet"></div>');
+          var $username = $('<div class="user"></div');
+          $tweet.text(' ' + tweet.message + '\n' + tweet.created_at);
+          $username.addClass(tweet.user).attr('user', tweet.user).text('@' + tweet.user + ': ');
+          $tweet.appendTo($username);
+          $username.appendTo($body);
           $tweet.appendTo($body);
+
+          $username.click(function () {
+          window.open($(this).find("a:first").attr("href"));
+          return false;
+        });
           index -= 1;
         }
+
+
+
+
+
 
 
       });

@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="dist/timeago.js" type="text/javascript"></script>
     <title>My Twittler</title>
   </head>
   <body>
@@ -81,30 +82,43 @@
     
 
           $username.on("click", function (event) {
+          $body.html('');
+        $button.appendTo($body);
 
-            var username = $username.text();
-            var userstream = streams.user[name];   
-          var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          if(tweet.user === username) {
-          var $tweet = $('<span class="tweet"></span>');
-          var $username = $('<div class="user"></span>');
-          $tweet.text(' ' + tweet.message + '\n' + tweet.created_at);
-          $username.addClass(tweet.user).attr('user', tweet.user).text('@' + tweet.user + ': ');
-          $tweet.appendTo($username);
-          $username.appendTo($body);
-          $tweet.appendTo($body);
-        }
+        $button.on('click', function () {
+          location.reload();
+        });
 
-            }
+        $button.mouseenter(function() {
+            $(this).css("background-color", "#EFFF83");
+          });
+           $button.mouseleave(function() {
+            $(this).css("background-color", "#0EC2FF");
+          });
+          var usernameind = $(this).text();
+          var miniindex = streams.home.length - 1;
+          while(miniindex >= 0){      
+            if (tweet.index === usernameind) {        
+              var tweetsindivual = streams.home[miniindex];
+              var $tweetindivual = $('<div class="tweetindivual"></div>');
+              var $usernameind = $('<div class="userindividual"></div>');
+              var $creationtimeind = $('<div class="timeindividual"></div>');
+             $tweetindivual.text(' ' + tweet.message + '\n');
+             $usernameind.addClass(tweet.user).attr('user', tweet.user).text('@' + tweet.user + ': ');
+             $creationtimeind.text(tweet.created_at);
+             $usernameind.appendTo($body);
+            $tweetindividual.appendTo($usernameind);
+            $body.appendTo($tweetindividual);
+            $creationtimeind.appendTo($tweetindividual);
+          }
+            miniindex -= 1;
+          }
           
         });
 
 
-
-          index -= 1;
-        }
+      index -= 1;
+      }
 
       var $submittweet = $('<h2>Submit a Tweet!</h2>');
       $submittweet.appendTo($body);
@@ -124,31 +138,32 @@
       $twittform.css("height", "20px");
       $twittform.css("margin-left", "40px");
       $twittform.css("font-family", "Georgia");
+      $twittform.attr("placeholder", "Whatcha wanna say?");
       var $tweetbutton = $('<button type="button" class = "submittweet">Submit Tweet!</button>');
       $tweetbutton.appendTo($body);
-        $tweetbutton.css("color", "black");
-        $tweetbutton.css("background-color", "#0EC2FF")
-        $tweetbutton.css("font-family", "Georgia");
-        $tweetbutton.css("font-size", "18px");
-        $tweetbutton.css("border", "5px solid");
-        $tweetbutton.css("margin-bottom", "20px");
-             $tweetbutton.mouseenter(function() {
+      $tweetbutton.css("color", "black");
+      $tweetbutton.css("background-color", "#0EC2FF")
+      $tweetbutton.css("font-family", "Georgia");
+      $tweetbutton.css("font-size", "18px");
+      $tweetbutton.css("border", "5px solid");
+      $tweetbutton.css("margin-bottom", "20px");
+      $tweetbutton.mouseenter(function() {
             $(this).css("background-color", "#EFFF83");
-          });
-           $tweetbutton.mouseleave(function() {
-            $(this).css("background-color", "#0EC2FF");
-          });
-           $tweetbutton.css("cursor", "pointer");
-        $tweetbutton.css("margin-left", "20px");
-        $tweetbutton.click(function() {
-          addTweet($twittform);
-        });
-
-
-
-
-
       });
+      $tweetbutton.mouseleave(function() {
+            $(this).css("background-color", "#0EC2FF");
+      });
+      $tweetbutton.css("cursor", "pointer");
+      $tweetbutton.css("margin-left", "20px");
+      $tweetbutton.click(function() {
+      const tweetinput = $twittform.text();
+    });
+
+
+
+
+
+});
 
     </script>
   </body>
